@@ -16,6 +16,10 @@ config/version="1.0.0"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://addons/ninetailsrabbit.indie_blueprint_audio/src/configuration/indie_blueprint_bus_layout.tres"
+
 [autoload]
 
 IndieBlueprintAudioManager="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/audio_manager.gd"
@@ -28,7 +32,7 @@ enabled=PackedStringArray("res://addons/ninetailsrabbit.indie_blueprint_audio/pl
 
 [indie-blueprint-audio]
 
-config/ninetailsrabbit.indie_blueprint_audio/sound_pool_amount=48
+config/ninetailsrabbit.indie_blueprint_audio/sound_pool_amount=32
 
 [rendering]
 
