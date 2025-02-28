@@ -10,9 +10,25 @@ config_version=5
 
 [application]
 
-config/name="godot-plugin-template"
+config/name="indie-blueprint-audio"
+config/description="Easily control game audio with features like volume adjustments, playlists, crossfading, and sound pools."
+config/version="1.0.0"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+IndieBlueprintAudioManager="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/audio_manager.gd"
+IndieBlueprintMusicManager="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/music_manager.gd"
+IndieBlueprintSoundPool="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/sound_pool.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ninetailsrabbit.indie_blueprint_audio/plugin.cfg")
+
+[indie-blueprint-audio]
+
+config/ninetailsrabbit.indie_blueprint_audio/sound_pool_amount=48
 
 [rendering]
 

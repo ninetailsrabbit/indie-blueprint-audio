@@ -1,10 +1,10 @@
 @tool
 class_name MyPluginSettings extends RefCounted
 
-const PluginPrefixName: String = "my_plugin" ## The folder name
-const GitRepositoryName: String = "my-plugin"
+const PluginPrefixName: String = "ninetailsrabbit.indie_blueprint_audio" ## The folder name
+const GitRepositoryName: String = "indie-blueprint-audio"
 
-static var PluginName: String = "MyPlugin"
+static var PluginName: String = "Indie Blueprint Audio"
 static var PluginProjectName: String = ProjectSettings.get_setting("application/config/name")
 static var PluginBasePath: String = "res://addons/%s" % PluginPrefixName
 static var PluginLocalConfigFilePath = "%s/plugin.cfg" % PluginBasePath
@@ -16,34 +16,34 @@ static var PluginTemporaryReleaseFilePath = "%s/%s.zip" % [PluginTemporaryDirect
 static var PluginDebugDirectoryPath = "res://debug"
 
 #region Plugin Settings
-static var UpdateNotificationSetting: String = PluginSettingsBasePath + "/update_notification_enabled"
+##PluginSettingsBasePath + "/your-setting"
+static var SoundPoolAmountSetting: String = PluginSettingsBasePath + "/sound_pool_amount"
 #endregion
 
 ## Enable to test the updater without need to have a latest release version to trigger it
 static var DebugMode: bool = false
-
-static func set_update_notification(enable: bool =  ProjectSettings.get_setting(UpdateNotificationSetting, true)) -> void:
-	ProjectSettings.set_setting(UpdateNotificationSetting, enable)
-	ProjectSettings.add_property_info({
-		"name": UpdateNotificationSetting,
-		"type": typeof(enable),
-	 	"value": enable,
-		"hint": PROPERTY_HINT_TYPE_STRING,
-		"hint_string": "Turn notifications on or off to receive alerts when new versions of the plugin are released"
-	})
-	ProjectSettings.save()
+static var AudioManagerSingleton: String = "IndieBlueprintAudioManager"
+static var MusicManagerSingleton: String = "IndieBlueprintMusicManager"
+static var SoundPoolSingleton: String = "IndieBlueprintSoundPool"
 
 
-static func is_update_notification_enabled() -> bool:
-	return ProjectSettings.get_setting(UpdateNotificationSetting, true)
-
-
-static func remove_settings() -> void:
-	remove_setting(UpdateNotificationSetting)
+static func setup_sound_pool_settings() -> void:
+	## https://github.com/godotengine/godot/issues/56598
+	var setting_name: String = MyPluginSettings.SoundPoolAmountSetting
+	
+	if not ProjectSettings.has_setting(setting_name):
+		ProjectSettings.set_setting(setting_name, 32)
+		ProjectSettings.add_property_info({
+				"name": setting_name,
+				"type": TYPE_INT,
+			})
+			
+		ProjectSettings.set_initial_value(setting_name, 32)
+		ProjectSettings.set_as_basic(setting_name, true)
+		ProjectSettings.save()
 
 
 static func remove_setting(name: String) -> void:
 	if ProjectSettings.has_setting(name):
 		ProjectSettings.set_setting(name, null)
 		ProjectSettings.save()
-		
