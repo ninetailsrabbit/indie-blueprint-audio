@@ -17,21 +17,23 @@
 <br>
 
 - [📦 Installation](#-installation)
-	- [Bus configuration layout](#bus-configuration-layout)
+  - [Bus configuration layout](#bus-configuration-layout)
 - [AudioManager 🔊](#audiomanager-)
-	- [Automatic unmute \& mute buses on application focus in \& out](#automatic-unmute--mute-buses-on-application-focus-in--out)
-	- [Bus](#bus)
-	- [Default audio volumes](#default-audio-volumes)
-	- [Handling volume](#handling-volume)
-	- [Audio effects](#audio-effects)
+  - [Automatic unmute \& mute buses on application focus in \& out](#automatic-unmute--mute-buses-on-application-focus-in--out)
+  - [Bus](#bus)
+  - [Default audio volumes](#default-audio-volumes)
+  - [Handling volume](#handling-volume)
+  - [Audio effects](#audio-effects)
 - [MusicManager 📻](#musicmanager-)
-	- [MusicTrack](#musictrack)
-	- [MusicPlaylist](#musicplaylist)
-	- [Signals](#signals)
-	- [Music bank](#music-bank)
-	- [Play modes](#play-modes)
-	- [Playlists](#playlists)
+  - [MusicTrack](#musictrack)
+  - [MusicPlaylist](#musicplaylist)
+  - [Signals](#signals)
+  - [Music bank](#music-bank)
+  - [Play modes](#play-modes)
+  - [Playlists](#playlists)
 - [SoundPool 🎼](#soundpool-)
+- [SoundQueue 🔉](#soundqueue-)
+- [ConsumableAudioStreamPlayer 🔉](#consumableaudiostreamplayer-)
 
 # 📦 Installation
 
@@ -368,4 +370,59 @@ func pause_streams_from_buses(buses: Array[String] = [&"Master"])
 func unpause_streams_from_bus(bus: String = &"Master")
 
 func unpause_streams_from_buses(buses: Array[String] = [&"Master"])
+```
+
+# SoundQueue 🔉
+
+The `SoundQueue` node simplifies playing sounds sequentially while maintaining a queue of `AudioStreamPlayers`. It offers features like:
+
+- **Queuing:** Manages a configurable number of AudioStreamPlayers for sequential playback.
+- **Random Pitch Variation (Optional):** Introduces slight pitch variations to queued sounds upon playback (adjustable range).
+- **Error Handling:** Provides warnings and error messages for potential configuration issues.
+
+**Properties:**
+`queue_count:` Defines the number of `AudioStreamPlayers` to create and manage in the queue _(default: 1)_.
+
+**API Reference:**
+`play_sound()`
+Checks if the `audiostream_players` array is empty. If not empty, it verifies if the current player in the queue is not playing.
+
+- Advances the queue index _(wrapping around to the beginning if necessary)._
+- Plays the sound associated with the current queue index.
+
+`play_sound_with_pitch_range(min_pitch_scale: float = 0.9, max_pitch_scale: float = 1.3)`:
+
+- Similar to `play_sound` but allows specifying a minimum and maximum pitch scale factor for random variation.
+- When playing a sound, it sets a random pitch scale within the specified range for the `AudioStreamPlayer` before playback.
+
+**How to use:**
+
+- Add the `SoundQueue` node to your scene.
+- Set the desired `queue_count` in the Inspector.
+- Add one `AudioStreamPlayer` _(or its 2D/3D variants)_ as child node to the `SoundQueue` with the `AudioStream` configured for your desired sound.
+- Use the `play_sound` or `play_sound_with_pitch_range` methods in your game code to trigger sound playback from the queue.
+
+```bash
+var sound_queue = get_node("SoundQueue") as SoundQueue
+
+# Play a sound from the queue
+sound_queue.play_sound()
+
+# Play a sound with random pitch variation (0.9 - 1.1 range)
+sound_queue.play_sound_with_pitch_range(0.9, 1.1)
+```
+
+# ConsumableAudioStreamPlayer 🔉
+
+They are available a consumable for each `AudioStreamPlayer` included 2D or 3D that works very simple, you can set a number of reproductions that when it reaches the number, free the `AudioStreamPlayer` from the scene.
+
+**How to use:** Easy as add the node to the scene and modify the exported `number_of_reproductions` variable
+
+```bash
+var horn_sound = preload("res://sounds/horn.ogg")
+
+## Via GDScript
+var consumable = ConsumableAudioStreamPlayer.new(5, horn_sound) # 5 reproductions to be free
+var consumable_2d = ConsumableAudioStreamPlayer2D.new(2, horn_sound) # 2 reproductions to be free
+var consumable_3d = ConsumableAudioStreamPlayer3D.new(1, horn_sound) # 1 reproductions to be free
 ```
