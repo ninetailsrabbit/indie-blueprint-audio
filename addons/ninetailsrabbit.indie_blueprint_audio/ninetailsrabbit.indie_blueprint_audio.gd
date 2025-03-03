@@ -3,11 +3,11 @@ extends EditorPlugin
 
 
 func _enter_tree() -> void:
-	add_autoload_singleton(MyPluginSettings.AudioManagerSingleton, "res://addons/ninetailsrabbit.indie_blueprint_audio/src/audio_manager.gd")
-	add_autoload_singleton(MyPluginSettings.MusicManagerSingleton, "res://addons/ninetailsrabbit.indie_blueprint_audio/src/music_manager.gd")
-	add_autoload_singleton(MyPluginSettings.SoundPoolSingleton, "res://addons/ninetailsrabbit.indie_blueprint_audio/src/sound_pool.gd")
+	add_autoload_singleton(IndieBlueprintAudioSettings.AudioManagerSingleton, "res://addons/ninetailsrabbit.indie_blueprint_audio/src/audio_manager.gd")
+	add_autoload_singleton(IndieBlueprintAudioSettings.MusicManagerSingleton, "res://addons/ninetailsrabbit.indie_blueprint_audio/src/music_manager.gd")
+	add_autoload_singleton(IndieBlueprintAudioSettings.SoundPoolSingleton, "res://addons/ninetailsrabbit.indie_blueprint_audio/src/sound_pool.gd")
 	
-	MyPluginSettings.setup_sound_pool_settings()
+	IndieBlueprintAudioSettings.setup_sound_pool_settings()
 	
 	add_custom_type(
 		"IndieBlueprintSoundQueue", 
@@ -41,6 +41,6 @@ func _exit_tree() -> void:
 	remove_custom_type("ConsumableAudioStreamPlayer")
 	remove_custom_type("IndieBlueprintSoundQueue")
 	
-	remove_autoload_singleton(MyPluginSettings.SoundPoolSingleton)
-	remove_autoload_singleton(MyPluginSettings.MusicManagerSingleton)
-	remove_autoload_singleton(MyPluginSettings.AudioManagerSingleton)
+	remove_autoload_singleton(IndieBlueprintAudioSettings.SoundPoolSingleton)
+	remove_autoload_singleton(IndieBlueprintAudioSettings.MusicManagerSingleton)
+	remove_autoload_singleton(IndieBlueprintAudioSettings.AudioManagerSingleton)

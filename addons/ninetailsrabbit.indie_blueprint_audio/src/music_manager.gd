@@ -52,8 +52,8 @@ var current_mode: PlayMode = PlayMode.Manual:
 
 
 func _ready():
-	if get_tree().root.has_node(MyPluginSettings.AudioManagerSingleton):
-		_create_audio_stream_players(get_tree().root.get_node(MyPluginSettings.AudioManagerSingleton).MusicBus)
+	if get_tree().root.has_node(IndieBlueprintAudioSettings.AudioManagerSingleton):
+		_create_audio_stream_players(get_tree().root.get_node(IndieBlueprintAudioSettings.AudioManagerSingleton).MusicBus)
 	
 #region Play mode
 func change_mode_to_manual() -> void:

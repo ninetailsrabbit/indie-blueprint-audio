@@ -16,7 +16,7 @@ func _notification(what):
 
 
 func _ready():
-	var pool_amount := ProjectSettings.get_setting(MyPluginSettings.SoundPoolAmountSetting)
+	var pool_amount := ProjectSettings.get_setting(IndieBlueprintAudioSettings.SoundPoolAmountSetting)
 	pool_players_number = 32 if pool_amount == null else pool_amount
 	
 	increase_pool(pool_players_number)

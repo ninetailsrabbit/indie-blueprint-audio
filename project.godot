@@ -20,6 +20,16 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="res://addons/ninetailsrabbit.indie_blueprint_audio/src/configuration/indie_blueprint_bus_layout.tres"
 
+[autoload]
+
+IndieBlueprintAudioManager="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/audio_manager.gd"
+IndieBlueprintMusicManager="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/music_manager.gd"
+IndieBlueprintSoundPool="*res://addons/ninetailsrabbit.indie_blueprint_audio/src/sound_pool.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ninetailsrabbit.indie_blueprint_audio/plugin.cfg")
+
 [indie-blueprint-audio]
 
 config/ninetailsrabbit.indie_blueprint_audio/sound_pool_amount=32

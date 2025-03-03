@@ -1,5 +1,5 @@
 @tool
-class_name MyPluginSettings extends RefCounted
+class_name IndieBlueprintAudioSettings extends RefCounted
 
 const PluginPrefixName: String = "ninetailsrabbit.indie_blueprint_audio" ## The folder name
 const GitRepositoryName: String = "indie-blueprint-audio"
@@ -29,7 +29,7 @@ static var SoundPoolSingleton: String = "IndieBlueprintSoundPool"
 
 static func setup_sound_pool_settings() -> void:
 	## https://github.com/godotengine/godot/issues/56598
-	var setting_name: String = MyPluginSettings.SoundPoolAmountSetting
+	var setting_name: String = IndieBlueprintAudioSettings.SoundPoolAmountSetting
 	
 	if not ProjectSettings.has_setting(setting_name):
 		ProjectSettings.set_setting(setting_name, 32)
