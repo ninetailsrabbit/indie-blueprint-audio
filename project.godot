@@ -12,8 +12,8 @@ config_version=5
 
 config/name="Indie Blueprint Audio"
 config/description="Easily control game audio with features like volume adjustments, playlists, crossfading, and sound pools."
-config/version="1.0.0"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/version="1.1.0"
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [audio]
