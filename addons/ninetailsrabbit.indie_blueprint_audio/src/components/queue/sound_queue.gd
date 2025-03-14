@@ -3,9 +3,9 @@ class_name IndieBlueprintSoundQueue extends Node
 
 const VolumeDBInaudible: float = -80.0
 
-@export var queue_count: float = 2:
+@export var queue_count: int = 2:
 	set(value):
-		queue_count = max(2, value)
+		queue_count = maxi(2, value)
 		
 		if is_inside_tree():
 			create_queue_audio_stream_players()
